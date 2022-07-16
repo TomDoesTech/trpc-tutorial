@@ -12,21 +12,27 @@ export async function sendLoginEmail({
   const testAccount = await nodemailer.createTestAccount()
 
   const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
+    host: 'localhost',
+    // host: 'smtp.ethereal.email',
+    // port: 587,
+    port: 1025,
     secure: false,
     auth: {
       user: testAccount.user,
       pass: testAccount.pass,
     },
-  })
+  });
 
-  const info = await transporter.sendMail({
-    from: '"Jane Doe" <j.doe@example.com>',
-    to: email,
-    subject: 'Login to your account',
-    html: `Login by clicking <a href="${url}/login#token=${token}">HERE</a>`,
-  })
+  try {
+    const info = await transporter.sendMail({
+      from: '"Jane Doe" <j.doe@example.com>',
+      to: email,
+      subject: 'Login to your account',
+      html: `Login by clicking <a href="${url}/login#token=${token}">HERE</a>`,
+    });
+    console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+  } catch (error) {
+    console.error(error);
+  }
 
-  console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`)
 }

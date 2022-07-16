@@ -3,7 +3,7 @@ CREATE TABLE "LoginToken" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" TEXT NOT NULL,
-    "redirect" TEXT NOT NULL DEFAULT E'/'
+    "redirect" TEXT NOT NULL DEFAULT '/'
 );
 
 -- CreateIndex

@@ -1,42 +1,37 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
-import { CreateUserInput } from '../schema/user.schema'
-import { trpc } from '../utils/trpc'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import { CreateUserInput } from '../schema/user.schema';
+import { trpc } from '../utils/trpc';
 
-function RegisterPage() {
-  const { handleSubmit, register } = useForm<CreateUserInput>()
-  const router = useRouter()
-
+const RegisterPage = () => {
+  const { handleSubmit, register } = useForm<CreateUserInput>();
+  const router = useRouter();
   const { mutate, error } = trpc.useMutation(['users.register-user'], {
+    onError: error => {},
     onSuccess: () => {
-      router.push('/login')
+      router.push('/login');
     },
-  })
-
-  function onSubmit(values: CreateUserInput) {
-    mutate(values)
-  }
-
+  });
+  const onSubmit = (value: CreateUserInput) => {
+    mutate(value);
+  };
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         {error && error.message}
         <h1>Register</h1>
-
         <input
-          type="email"
-          placeholder="jane.doe@example.com"
+          type='email'
+          placeholder='gon.fricks@hxh.com'
           {...register('email')}
         />
         <br />
-        <input type="text" placeholder="Tom" {...register('name')} />
-        <button type="submit">Register</button>
+        <input placeholder='Gon Fricks' {...register('name')} />
+        <button type='submit'>Submit</button>
       </form>
-
-      <Link href="/login">Login</Link>
+      <Link href='/login'>Login</Link>
     </>
-  )
-}
-
-export default RegisterPage
+  );
+};
+export default RegisterPage;
