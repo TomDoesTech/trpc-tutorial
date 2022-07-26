@@ -26,7 +26,7 @@
 * Enough tRPC to be productive
 * Using Next.js as a monorepo
 * Some TypeScript
-* OPT login flow
+* OTP login flow
 
 ## What you will need
 * A running instance of a DB (Postgres, Mongo, SQLlite, MYSQL) - Postgres
