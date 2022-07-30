@@ -4,11 +4,23 @@ import { withTRPC } from '@trpc/next';
 import type { AppProps } from 'next/app';
 import superjson from 'superjson';
 import { url } from '../constants';
+import { UserContextProvider } from '../context/user.context';
 import { AppRouter } from '../server/route/app.router';
 import '../styles/globals.css';
+import { trpc } from '../utils/trpc';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  const { data, isLoading } = trpc.useQuery(['users.me']);
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  return (
+    <UserContextProvider value={data}>
+      <main>
+        <Component {...pageProps} />;
+      </main>
+    </UserContextProvider>
+  );
 }
 
 export default withTRPC<AppRouter>({

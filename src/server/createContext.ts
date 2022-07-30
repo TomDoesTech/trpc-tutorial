@@ -13,16 +13,16 @@ interface CtxUser {
 function getUserFromRequest(req: NextApiRequest) {
   const token = req.cookies.token;
 
-  if (token) {
-    try {
-      const verified = verifyJwt<CtxUser>(token);
-      return verified;
-    } catch (e) {
-      return null;
-    }
+  if (!token) {
+    return null;
   }
 
-  return null;
+  try {
+    const verified = verifyJwt<CtxUser>(token);
+    return verified;
+  } catch (e) {
+    return null;
+  }
 }
 
 export function createContext({
@@ -32,9 +32,9 @@ export function createContext({
   req: NextApiRequest;
   res: NextApiResponse;
 }) {
-  // const user = getUserFromRequest(req)
+  const user = getUserFromRequest(req);
 
-  return { req, res, prisma };
+  return { req, res, prisma, user };
 }
 
 export type Context = ReturnType<typeof createContext>;
