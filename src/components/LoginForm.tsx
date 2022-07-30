@@ -10,7 +10,6 @@ type LoginFormProps = {};
 
 const LoginForm: React.FC<LoginFormProps> = ({}) => {
   const router = useRouter();
-  console.log(router);
 
   const { handleSubmit, register } = useForm<RequestOtpInput>();
   const { mutate, error, isSuccess } = trpc.useMutation(['users.request-otp']);

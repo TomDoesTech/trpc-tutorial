@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider value={data}>
       <main>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </main>
     </UserContextProvider>
   );

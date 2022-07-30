@@ -23,13 +23,13 @@ function CreatePostPage() {
 
       <h1>Create posts</h1>
 
-      <input type="text" placeholder="Your post title" {...register('title')} />
+      <input type='text' placeholder='Your post title' {...register('title')} />
       <br />
-      <textarea placeholder="Your post title" {...register('body')} />
+      <textarea placeholder='Your post title' {...register('body')} />
       <br />
       <button>Create post</button>
     </form>
-  )
+  );
 }
 
 export default CreatePostPage
